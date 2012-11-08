@@ -5,8 +5,13 @@ task :compile do
   `nanoc compile`
 end
 
+desc "Push the current master branch to origin"
+task :push_master do
+  `git push origin master`
+end
+
 desc "Publish to http://developer.github.com"
-task :publish => [:clean] do
+task :publish => [:push_master, :clean] do
   FileUtils.rm_r('output') if File.exist?('output')
 
   sh "nanoc compile"
