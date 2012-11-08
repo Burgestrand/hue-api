@@ -21,17 +21,6 @@ compile '/feed/' do
   filter :kramdown, :toc_levels => [2]
 end
 
-%w(v3 */).each do |version|
-  compile "/changes/#{version}" do
-    filter :erb
-    filter :kramdown, :toc_levels => [2]
-    filter :colorize_syntax,
-      :colorizers => {:javascript => :pygmentsrb}
-    layout 'changes' if version[0] == '*'
-    layout 'default'
-  end
-end
-
 compile '*' do
   filter :erb
   filter :kramdown, :toc_levels => [2]
@@ -46,10 +35,6 @@ end
 
 route '/CNAME/' do
   '/CNAME'
-end
-
-route '/feed' do
-  '/changes.atom'
 end
 
 route '*' do
