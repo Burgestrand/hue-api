@@ -13,40 +13,6 @@ the Philips Hue and related protocols.
 - Mailing list web interface: <https://groups.google.com/d/forum/hue-hackers>
 - Mailing list e-mail address: <hue-hackers@googlegroups.com>
 
-## API
-
-Typical API workflow:
-
-1. Hue hub discovery via [SSDP][]. Ruhue has an example of how this discovery
-   can be performed written in Ruby and UDP sockets: [Hue.discover][].
-2. A one-time application registration to the Hue hub via a POST to [[/api]].
-   The username used in this registration is used in all subsequent API calls.
-3. Finished. You may now place any API calls against the Hue hub.
-
-[SSDP]: http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol
-[Hue.discover]: https://github.com/Burgestrand/ruhue/blob/181072803db7f64730576373147ae15694416617/lib/hue.rb#L23
-
-## Contributions
-
-To contribute to this wiki, please clone the Ruhue repository, check out the
-wiki branch, and create your feature branch from there. Once you are done, do
-send a pull request to the Ruhue repository.
-
-This is the way it’ll have to be until GitHub supports pull requests for wikis.
-
-When doing a contribution, please respect the following formatting rules:
-
-- Every API URL has it’s own page.
-- If different verbs are supported (GET, POST, PUT, DELETE) for an URL, explanation
-  of each verb and it’s effects are written on the page for that URL.
-- Parameters in URLs are prefixed by a colon, e.g. `/api/:username`.
-- All API methods must include an example response body.
-- All API methods that allow a request body should include an example body payload.
-- All API methods that allow a request body must list available parameter names, if
-  the parameter is optional, and an explanation of it’s effect.
-- JSON data must be formatted with <http://jsonformatter.curiousconcept.com/>, at two
-  space indentation.
-
 ### GET /description.xml
 
 Appears to be a general description about the device. Presentation URL, as
