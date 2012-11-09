@@ -34,37 +34,6 @@ the Philips Hue and related protocols.</p>
 </li>
   <li>Mailing list e-mail address: <a href="mailto:hue-hackers@googlegroups.com">hue-hackers@googlegroups.com</a>
 </li>
-</ul><h2 id="api">API</h2>
-
-<p>Typical API workflow:</p>
-
-<ol>
-<li>Hue hub discovery via <a href="http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol">SSDP</a>. Ruhue has an example of how this discovery
-can be performed written in Ruby and UDP sockets: <a href="https://github.com/Burgestrand/ruhue/blob/181072803db7f64730576373147ae15694416617/lib/hue.rb#L23">Hue.discover</a>.</li>
-  <li>A one-time application registration to the Hue hub via a POST to [[/api]].
-The username used in this registration is used in all subsequent API calls.</li>
-  <li>Finished. You may now place any API calls against the Hue hub.</li>
-</ol><h2 id="contributions">Contributions</h2>
-
-<p>To contribute to this wiki, please clone the Ruhue repository, check out the
-wiki branch, and create your feature branch from there. Once you are done, do
-send a pull request to the Ruhue repository.</p>
-
-<p>This is the way it’ll have to be until GitHub supports pull requests for wikis.</p>
-
-<p>When doing a contribution, please respect the following formatting rules:</p>
-
-<ul>
-<li>Every API URL has it’s own page.</li>
-  <li>If different verbs are supported (GET, POST, PUT, DELETE) for an URL, explanation
-of each verb and it’s effects are written on the page for that URL.</li>
-  <li>Parameters in URLs are prefixed by a colon, e.g. <code>/api/:username</code>.</li>
-  <li>All API methods must include an example response body.</li>
-  <li>All API methods that allow a request body should include an example body payload.</li>
-  <li>All API methods that allow a request body must list available parameter names, if
-the parameter is optional, and an explanation of it’s effect.</li>
-  <li>JSON data must be formatted with <a href="http://jsonformatter.curiousconcept.com/">http://jsonformatter.curiousconcept.com/</a>, at two
-space indentation.</li>
 </ul><h3 id="get-descriptionxml">GET /description.xml</h3>
 
 <p>Appears to be a general description about the device. Presentation URL, as
