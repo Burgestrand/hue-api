@@ -42,3 +42,5 @@ task :publish => [:push_master, :clean] do
     sh 'git push origin gh-pages'
   end
 end
+
+task :default => :server
