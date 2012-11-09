@@ -43,11 +43,3 @@ data_sources:
   -
     type: static
     items_root: /static
-
-# Array of [version, released_at] Array tuples.
-api_versions:
-  -
-    - beta
-    - 2011-4-27
-  -
-    - v3
