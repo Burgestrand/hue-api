@@ -2,15 +2,20 @@ require 'nanoc3/tasks'
 
 desc "Compile the site"
 task :compile do
-  `nanoc compile`
+  sh 'nanoc compile -l -V'
+end
+
+desc "Run a webserver for viewing the site locally"
+task :server => :compile do
+  sh 'nanoc view'
 end
 
 desc "Push the current master branch to origin"
 task :push_master do
-  `git push origin master`
+  sh 'git push origin master'
 end
 
-desc "Publish to http://developer.github.com"
+desc "Publish the static site to github pages"
 task :publish => [:push_master, :clean] do
   FileUtils.rm_r('output') if File.exist?('output')
 
@@ -34,6 +39,6 @@ task :publish => [:push_master, :clean] do
     puts `git show #{csha} --stat`
     puts "Updating gh-pages from #{old_sha}"
     `git update-ref refs/heads/gh-pages #{csha}`
-    `git push origin gh-pages`
+    sh 'git push origin gh-pages'
   end
 end
