@@ -2,14 +2,14 @@ source "http://rubygems.org"
 
 gem 'builder'
 gem 'coderay'
-gem 'kramdown', '~> 0.13.2'
-gem 'mime-types', '~> 1.16'
-gem 'nanoc', '~> 3.4.0'
-gem 'nokogiri', '~> 1.4.4'
+gem 'kramdown'
+gem 'mime-types'
+gem 'nanoc', '~> 3.4'
+gem 'nokogiri'
 gem 'pygments.rb'
-gem 'rake', '~> 0.9.2'
+gem 'rake'
 gem 'thin'
-gem 'yajl-ruby', '~> 0.8.2'
+gem 'yajl-ruby'
 
 group :development do
   gem 'adsf'
