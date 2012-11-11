@@ -1,3 +1,7 @@
+---
+title: Application registration
+---
+
 # Application registration
 
 Before you can send any API calls to the bridge you’ll need to register a username. Your

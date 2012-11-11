@@ -1,8 +1,8 @@
 ---
-title: Hue API
+title: Unofficial Philips Hue API Reference
 ---
 
-# [Philips Hue API — Unofficial Documentation Reference](http://burgestrand.github.com/hue-api)
+# [Philips Hue API — Unofficial Reference Documentation](http://burgestrand.github.com/hue-api)
 
 Philips Hue API reference documentation, created by reverse-engineering,
 sniffing network traffic and a lot of guessing.

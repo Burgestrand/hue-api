@@ -1,3 +1,7 @@
+---
+title: Bridge discovery
+---
+
 # Bridge discovery over SSDP
 
 Hue bridge discovery is done on the local network through [SSDP][].

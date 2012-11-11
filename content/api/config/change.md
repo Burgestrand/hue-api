@@ -1,1 +1,3 @@
-put.md
+---
+title: Changing bridge configuration
+---
