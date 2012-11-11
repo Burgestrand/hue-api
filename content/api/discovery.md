@@ -2,11 +2,42 @@
 title: Bridge discovery
 ---
 
-# Bridge discovery over SSDP
+# Bridge discovery
 
 Hue bridge discovery is done on the local network through [SSDP][].
 
-## Bridge description
+In summary, you send out an UDP packet to a multicast address (239.255.255.250:1900 for IPv4). The Hue bridge
+will respond with information on it’s whereabouts.
+
+<%= toc %>
+
+## UDP broadcast
+
+<% code_block do %>
+M-SEARCH * HTTP/1.1
+HOST: 239.255.255.250:1900
+MAN: ssdp:discover
+MX: 10
+ST: ssdp:all
+<% end %>
+
+### Response
+
+<% code_block do %>
+HTTP/1.1 200 OK
+CACHE-CONTROL: max-age=100
+EXT:
+LOCATION: http://192.168.0.21:80/description.xml
+SERVER: FreeRTOS/6.0.5, UPnP/1.0, IpBridge/0.1
+ST: upnp:rootdevice
+USN: uuid:2fa00080-d000-11e1-9b23-001f80007bbe::upnp:rootdevice
+<% end %>
+
+There may be other services on your network that respond to your search query.
+You’ll need to issue a GET request to `/description.xml`, and match against `modelName`
+to find out if it’s a Hue bridge or not.
+
+## Retrieving bridge description.xml
 
 <%= http 'GET /description.xml' %>
 

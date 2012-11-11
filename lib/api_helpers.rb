@@ -65,7 +65,8 @@ module APIHelpers
     code_block(h(xml), language: "xml", class: "highlight", &block)
   end
 
-  def code_block(content, attributes = {}, &block)
+  def code_block(content = nil, attributes = {}, &block)
+    content ||= capture(&block).lstrip
     language = "language-#{attributes.delete(:language)}" if attributes.has_key?(:language)
     attributes_html = attributes.map do |tuple|
       '%s="%s"' % tuple.map { |x| h(x.to_s) }

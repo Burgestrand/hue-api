@@ -10,8 +10,7 @@ bridge will remember your username, and keeps track of when it was last used.
 Multiple applications can be registered with the same username, as long as their devicetype
 is different. It is currently unknown what effect this might have on the bridge.
 
-- TOC
-{:toc}
+<%= toc %>
 
 ## Registering an application
 
@@ -31,13 +30,25 @@ devicetype
 
 ### Response
 
+#### Success
+
 <%= json [{"success" => { "username" => "burgestrand" }}] %>
 
-### Failure responses
+#### Link button not pressed
 
-Failure. Given an invalid username (too short), and an empty devicetype. Error
-type 7 is for invalid values, and the description contains a human readable
-string of what is wrong.
+<% json do %>
+[
+  {
+    "error":{
+      "type":101,
+      "address":"",
+      "description":"link button not pressed"
+    }
+  }
+]
+<% end %>
+
+#### Invalid username and empty devicetype
 
 <% json do %>
 [
@@ -53,22 +64,6 @@ string of what is wrong.
       "type":2,
       "address":"/",
       "description":"body contains invalid json"
-    }
-  }
-]
-<% end %>
-
-A successful initial post, given a username of `burgestrand` and device type of
-`macbook`.  As you can see, an error of type 101 means that the user needs to
-press the link button on the Hue bridge, in order for it to allow new registrations.
-
-<% json do %>
-[
-  {
-    "error":{
-      "type":101,
-      "address":"",
-      "description":"link button not pressed"
     }
   }
 ]

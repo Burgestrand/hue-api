@@ -35,14 +35,15 @@ changes, and send us a [pull request](http://help.github.com/send-pull-requests/
 [SSDP]: http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol
 [Hue.discover]: https://github.com/Burgestrand/ruhue/blob/181072803db7f64730576373147ae15694416617/lib/hue.rb#L23
 
-### GET /api/`username`
+## Reading Hue bridge system state
 
-Username is the username you used for registering your application in `POST /api` call.
-This API call will return a hash, containing information about bridge configuration (same
-as `GET /api/username/config`), the lights, groups (unsure of what it is about), and
-schedules (commands to be executed at a given timestamp).
+You can read the state of the entire system, after <%= relative_link_to 'authentication', '/api/auth/registration' %>, through a single endpoint.
 
-```json
+<%= http 'GET /api/:username' %>
+
+### Response
+
+<% json do %>
 {
   "lights":{
     "1":{
@@ -75,68 +76,6 @@ schedules (commands to be executed at a given timestamp).
         "7":"none",
         "8":"none"
       }
-    },
-    "2":{
-      "state":{
-        "on":true,
-        "bri":240,
-        "hue":15331,
-        "sat":121,
-        "xy":[
-          0.4448,
-          0.4066
-        ],
-        "ct":343,
-        "alert":"none",
-        "effect":"none",
-        "colormode":"ct",
-        "reachable":true
-      },
-      "type":"Extended color light",
-      "name":"TV Höger",
-      "modelid":"LCT001",
-      "swversion":"65003148",
-      "pointsymbol":{
-        "1":"none",
-        "2":"none",
-        "3":"none",
-        "4":"none",
-        "5":"none",
-        "6":"none",
-        "7":"none",
-        "8":"none"
-      }
-    },
-    "3":{
-      "state":{
-        "on":true,
-        "bri":240,
-        "hue":15331,
-        "sat":121,
-        "xy":[
-          0.4448,
-          0.4066
-        ],
-        "ct":343,
-        "alert":"none",
-        "effect":"none",
-        "colormode":"ct",
-        "reachable":true
-      },
-      "type":"Extended color light",
-      "name":"Skrivbord",
-      "modelid":"LCT001",
-      "swversion":"65003148",
-      "pointsymbol":{
-        "1":"none",
-        "2":"none",
-        "3":"none",
-        "4":"none",
-        "5":"none",
-        "6":"none",
-        "7":"none",
-        "8":"none"
-      }
     }
   },
   "groups":{
@@ -157,17 +96,7 @@ schedules (commands to be executed at a given timestamp).
         "last use date":"2012-11-06T20:43:34",
         "create date":"1970-01-01T00:00:45",
         "name":"Kim Burgestrand’s iPhone"
-      },
-      "9874172fdb7caf6f62cc9a935276229f":{
-        "last use date":"2012-11-06T19:20:35",
-        "create date":"2012-11-05T20:41:24",
-        "name":"iPhone"
-      },
-      "burgestrand":{
-        "last use date":"2012-11-06T21:57:59",
-        "create date":"2012-11-06T21:29:57",
-        "name":"macbook"
-      },
+      }
     },
     "swversion":"01003542",
     "swupdate":{
@@ -181,23 +110,6 @@ schedules (commands to be executed at a given timestamp).
   },
   "schedules":{
     "1":{
-      "name":"Frukost on f 012373           ",
-      "description":" ",
-      "command":{
-        "address":"/api/24e04807fe143caeb52b4ccb305635f8/lights/3/state",
-        "body":{
-          "bri":1,
-          "xy":[
-            0.52594,
-            0.43074
-          ],
-          "on":true
-        },
-        "method":"PUT"
-      },
-      "time":"2012-11-07T04:41:00"
-    },
-    "2":{
       "name":"Frukost on 103811             ",
       "description":" ",
       "command":{
@@ -217,46 +129,7 @@ schedules (commands to be executed at a given timestamp).
     }
   }
 }
-```
-
-### GET /api/`username`/config
-
-Retrieves Hue bridge configuration information. Can also be retrieved from `GET /api/username`.
-
-```json
-{
-  "name":"Lumm",
-  "mac":"00:00:00:00:7b:be",
-  "dhcp":true,
-  "ipaddress":"192.168.0.21",
-  "netmask":"255.255.255.0",
-  "gateway":"192.168.0.1",
-  "proxyaddress":" ",
-  "proxyport":0,
-  "UTC":"2012-11-06T21:35:35",
-  "whitelist":{
-    "24e04807fe143caeb52b4ccb305635f8":{
-      "last use date":"2012-11-06T20:43:34",
-      "create date":"1970-01-01T00:00:45",
-      "name":"Kim Burgestrand’s iPhone"
-    },
-    "burgestrand":{
-      "last use date":"2012-11-05T20:39:41",
-      "create date":"2012-11-06T21:31:10",
-      "name":"macbook"
-    }
-  },
-  "swversion":"01003542",
-  "swupdate":{
-    "updatestate":0,
-    "url":"",
-    "text":"",
-    "notify":false
-  },
-  "linkbutton":false,
-  "portalservices":true
-}
-```
+<% end %>
 
 ### GET /api/`username`/lights/
 

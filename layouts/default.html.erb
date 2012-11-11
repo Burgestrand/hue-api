@@ -31,25 +31,13 @@
         <ul>
           <li class="js-guides"><h3><a href="<%= relative_path_to("/") %>">Documentation Reference</a></h3></li>
             <ul class="js-guides">
-              <li><a href="<%= relative_path_to("/api/discovery") %>">Bridge discovery over SSDP</a></li>
+              <li><a href="<%= relative_path_to("/api/discovery") %>">Bridge discovery</a></li>
               <li><a href="<%= relative_path_to("/api/auth/registration") %>">One-time application registration</a></li>
+              <li><a href="<%= relative_path_to("/api/settings") %>">Hue bridge settings</a></li>
             </ul>
           </li>
-          <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="<%= relative_path_to("/api/config/") %>">Configuration</a></h3>
-            <ul class="js-guides">
-              <li><a href="<%= relative_path_to("/api/config/show") %>">Retrieving configuration</a></li>
-              <li><a href="<%= relative_path_to("/api/config/change") %>">Changing configuration</a></li>
-            </ul>
-          </li>
-          <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="<%= relative_path_to("/api/lights/") %>">Lights</a></h3>
-            <ul class="js-guides">
-              <li><a href="<%= relative_path_to("/api/lights/list") %>">Listing available lights</a></li>
-              <li><a href="<%= relative_path_to("/api/lights/show") %>">Retrieving light state</a></li>
-              <li><a href="<%= relative_path_to("/api/lights/change") %>">Changing light state</a></li>
-            </ul>
-          </li>
+          <li class="js-guides"><h3><a href="<%= relative_path_to("/api/config") %>">Configuration</a></h3></li>
+          <li class="js-guides"><h3><a href="<%= relative_path_to("/api/lights") %>">Lights</a></h3></li>
           <li class="js-guides"><h3><a href="<%= relative_path_to("/api/schedules") %>">Schedules</a></h3></li>
           <li class="js-guides"><h3><a href="<%= relative_path_to("/api/groups") %>">Groups</a></h3></li>
         </ul>
