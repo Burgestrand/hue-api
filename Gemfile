@@ -10,6 +10,7 @@ gem 'pygments.rb'
 gem 'rake'
 gem 'thin'
 gem 'yajl-ruby'
+gem 'foreman'
 
 group :development do
   gem 'adsf'

@@ -10,6 +10,8 @@ GEM
       colored (>= 1.2)
     daemons (1.1.9)
     eventmachine (1.0.0)
+    foreman (0.57.0)
+      thor (>= 0.13.6)
     fssm (0.2.9)
     kramdown (0.14.0)
     mime-types (1.19)
@@ -26,6 +28,7 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
+    thor (0.16.0)
     yajl-ruby (1.1.0)
 
 PLATFORMS
@@ -35,6 +38,7 @@ DEPENDENCIES
   adsf
   builder
   coderay
+  foreman
   fssm
   kramdown
   mime-types
