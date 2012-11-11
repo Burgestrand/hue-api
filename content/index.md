@@ -2,7 +2,7 @@
 title: Hue API
 ---
 
-# The Philips Hue API
+# [Philips Hue API — Unofficial Documentation Reference](http://burgestrand.github.com/hue-api)
 
 Philips Hue API reference documentation, created by reverse-engineering,
 sniffing network traffic and a lot of guessing.
@@ -12,6 +12,28 @@ the Philips Hue and related protocols.
 
 - Mailing list web interface: <https://groups.google.com/d/forum/hue-hackers>
 - Mailing list e-mail address: <hue-hackers@googlegroups.com>
+
+This repository was forked from the [GitHub API v3 documentation][].  It’s a
+static site built with [nanoc][], and is published to <http://burgestrand.github.com/hue-api>
+for hosting via [GitHub Pages][].
+
+All submissions are welcome. To submit a change, fork this repo, commit your
+changes, and send us a [pull request](http://help.github.com/send-pull-requests/).
+
+[nanoc]: http://nanoc.stoneship.org/
+[GitHub Pages]: http://pages.github.com/
+[GitHub API v3 documentation]: https://github.com/github/developer.github.com
+
+## Typical Hue bridge API workflow
+
+1. <%= relative_link_to 'Hue bridge discovery', '/api/discovery' %> via SSDP (a multicast protocol over UDP).
+   Ruhue has an example of how this discovery can be performed written in Ruby and UDP sockets: [Hue.discover][].
+2. <%= relative_link_to 'A one-time application registration', '/api/auth/registraiton' %> to the Hue bridge
+   over HTTP. You pick your own username, which is used for all subsequent API calls.
+3. Finished. You may now place any API calls, using your username, against the Hue bridge.
+
+[SSDP]: http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol
+[Hue.discover]: https://github.com/Burgestrand/ruhue/blob/181072803db7f64730576373147ae15694416617/lib/hue.rb#L23
 
 ### GET /description.xml
 
@@ -67,92 +89,11 @@ well as icons, are reachable via GET requests.
 </root>
 ```
 
-## POST /api
-
-Register an application with the Hue hub. All API calls to the Hue hub require a
-registered username as part of the URL.
-
-After application registration, application details will be remembered by the Hub.
-The Hub also keeps track of last access, as can be seen in GET [[/api/:username/config]],
-part of the `whitelist` response property.
-
-If you register multiple times, even if it is with the same parameters, the Hub will
-register every successfull registration in the whitelist. You can delete registered
-users from the whitelist with DELETE [[/api/:username/config/whitelist/:username]].
-
-### Parameters
-
-- username: numbers (0-9) and letters (a-z, A-Z), between 10 and 40 bytes in length (inclusive).
-- devicetype: appears to accept any string, between 1 and 40 bytes in length (inclusive).
-
-```json
-{
-  "username":"burgestrand",
-  "devicetype":"any random thing"
-}
-```
-
-### Responses
-
-Failure. Given an invalid username (too short), and an empty devicetype. Error
-type 7 is for invalid values, and the description contains a human readable
-string of what is wrong.
-
-```json
-[
-  {
-    "error":{
-      "type":7,
-      "address":"/username",
-      "description":"invalid value, burges, for parameter, username"
-    }
-  },
-  {
-    "error":{
-      "type":2,
-      "address":"/",
-      "description":"body contains invalid json"
-    }
-  }
-]
-```
-
-A successful initial post, given a username of `burgestrand` and device type of
-`macbook`.  As you can see, an error of type 101 means that the user needs to
-press the link button on the Hue hub, in order for it to allow new registrations.
-
-```json
-[
-  {
-    "error":{
-      "type":101,
-      "address":"",
-      "description":"link button not pressed"
-    }
-  }
-]
-```
-
-Same request as above example, but after the link button has been pressed. I am
-currently unaware if there is a certain time this pairing needs to be done after
-clicking the link button.
-
-The username is used for subsequent API calls.
-
-```json
-[
-  {
-    "success":{
-      "username":"burgestrand"
-    }
-  }
-]
-```
 
 ### GET /api/`username`
 
 Username is the username you used for registering your application in `POST /api` call.
-This API call will return a hash, containing information about hub configuration (same
+This API call will return a hash, containing information about bridge configuration (same
 as `GET /api/username/config`), the lights, groups (unsure of what it is about), and
 schedules (commands to be executed at a given timestamp).
 
@@ -335,7 +276,7 @@ schedules (commands to be executed at a given timestamp).
 
 ### GET /api/`username`/config
 
-Retrieves Hue hub configuration information. Can also be retrieved from `GET /api/username`.
+Retrieves Hue bridge configuration information. Can also be retrieved from `GET /api/username`.
 
 ```json
 {
@@ -374,7 +315,7 @@ Retrieves Hue hub configuration information. Can also be retrieved from `GET /ap
 
 ### GET /api/`username`/lights/
 
-Retrieves a list of lights paired with the Hue hub, and their names.
+Retrieves a list of lights paired with the Hue bridge, and their names.
 
 ```json
 {
@@ -418,7 +359,7 @@ Update Hue configuration values. A list of values can be retrieved from `GET /ap
 
 All parameters are optional. Only the parameters present will update values on the Hue.
 
-- name: name of the Hue hub.
+- name: name of the Hue bridge.
 
 Acceptable example payload:
 
@@ -439,18 +380,6 @@ an example from changing the name.
     "success":{
       "/config/name":"Lumm"
     }
-  }
-]
-```
-
-### DELETE /api/`username`/config/whitelist/`username`
-
-Removes a username from the whitelist of registered applications.
-
-```json
-[
-  {
-    "success":"/config/whitelist/burgestrand deleted"
   }
 ]
 ```
