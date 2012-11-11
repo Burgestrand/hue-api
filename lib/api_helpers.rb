@@ -84,3 +84,5 @@ module APIHelpers
     end
   end
 end
+
+include APIHelpers
