@@ -1,0 +1,16 @@
+.api-endpoint
+{
+}
+
+.api-endpoint .http-verb
+{
+  font-weight: bold;
+  color: #900;
+}
+
+.api-endpoint .param
+{
+  color: #369;
+  font-style: normal;
+  font-weight: bold;
+}
