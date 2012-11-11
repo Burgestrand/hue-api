@@ -4,7 +4,7 @@ Hue bridge discovery is done on the local network through [SSDP][].
 
 ## Bridge description
 
-    GET /description.xml
+<%= http 'GET /description.xml' %>
 
 ### Response
 

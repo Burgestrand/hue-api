@@ -35,12 +35,6 @@ changes, and send us a [pull request](http://help.github.com/send-pull-requests/
 [SSDP]: http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol
 [Hue.discover]: https://github.com/Burgestrand/ruhue/blob/181072803db7f64730576373147ae15694416617/lib/hue.rb#L23
 
-### GET /description.xml
-
-Appears to be a general description about the device. Presentation URL, as
-well as icons, are reachable via GET requests.
-
-
 ### GET /api/`username`
 
 Username is the username you used for registering your application in `POST /api` call.
