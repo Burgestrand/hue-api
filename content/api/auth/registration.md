@@ -29,13 +29,13 @@ devicetype
 
 <%= json [{"success" => { "username" => "burgestrand" }}] %>
 
-### Failures
+### Failure responses
 
 Failure. Given an invalid username (too short), and an empty devicetype. Error
 type 7 is for invalid values, and the description contains a human readable
 string of what is wrong.
 
-```json
+<% json do %>
 [
   {
     "error":{
@@ -52,13 +52,13 @@ string of what is wrong.
     }
   }
 ]
-```
+<% end %>
 
 A successful initial post, given a username of `burgestrand` and device type of
 `macbook`.  As you can see, an error of type 101 means that the user needs to
 press the link button on the Hue bridge, in order for it to allow new registrations.
 
-```json
+<% json do %>
 [
   {
     "error":{
@@ -68,16 +68,7 @@ press the link button on the Hue bridge, in order for it to allow new registrati
     }
   }
 ]
-```
-
-Same request as above example, but after the link button has been pressed. I am
-currently unaware if there is a certain time this pairing needs to be done after
-clicking the link button.
-
-The username is used for subsequent API calls.
-
-```json
-```
+<% end %>
 
 ## Deregistering an application
 

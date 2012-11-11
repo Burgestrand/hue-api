@@ -3,6 +3,7 @@ require 'yajl/json_gem'
 require 'stringio'
 require 'cgi'
 require 'securerandom'
+require 'pry'
 
 $root = File.expand_path('../', File.dirname(__FILE__))
 
@@ -39,31 +40,42 @@ module APIHelpers
       lines << "#{key}: #{value}"
     end
 
-    %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
+    code_block(lines.join("\n"), class: css_class)
   end
 
-  def json(key)
-    hash = case key
-    when Hash
-      h = {}
-      key.each { |k, v| h[k.to_s] = v }
-      h
-    when Array
-      key
+  def json(json = nil, &block)
+    hash = if block_given?
+      JSON.load capture(&block)
+    elsif json.is_a?(Hash)
+      Hash[json.map { |k, v| [k.to_s, v] }]
     else
-      path = File.join($root, "examples/#{key}")
-      JSON.load File.read(path)
+      json
     end
 
-    hash = yield hash if block_given?
-
-    %(<pre class="highlight"><code class="language-javascript">) +
-      JSON.pretty_generate(hash) + "</code></pre>"
+    html = code_block(JSON.pretty_generate(hash), class: "highlight", language: "javascript")
+    concat(html, &block)
   end
 
-  def text_html(response, status, head = {})
-    hs = headers(status, head.merge('Content-Type' => 'text/html'))
-    res = CGI.escapeHTML(response)
-    hs + %(<pre class="highlight"><code>) + res + "</code></pre>"
+  def xml(&block)
+    xml = capture(&block)
+    html = code_block(xml, language: "xml", class: "highlight")
+    concat(html, &block)
+  end
+
+  def code_block(content, attributes = {})
+    language = "language-#{attributes.delete(:language)}"
+    attributes_html = attributes.map do |tuple|
+      '%s="%s"' % tuple.map { |x| h(x.to_s) }
+    end.join(" ")
+    %(<pre #{attributes_html}><code class="#{language}">#{h(content.to_s)}</code></pre>)
+  end
+
+  def concat(string, &block)
+    string &&= string.to_s
+    if block.nil?
+      string
+    else
+      eval('_erbout', block.binding) << string
+    end
   end
 end
