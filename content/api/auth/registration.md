@@ -11,7 +11,7 @@ is different. It is currently unknown what effect this might have on the bridge.
 
 ## Registering an application
 
-    POST /api
+<%= http 'POST /api' %>
 
 ### Parameters
 
@@ -72,9 +72,9 @@ press the link button on the Hue bridge, in order for it to allow new registrati
 
 ## Deregistering an application
 
-Removes a username from the whitelist of registered applications.
+Removes a username from the whitelist of registered applications. See also <%= relative_link_to 'changing configuration', '/api/config/change' %>.
 
-    DELETE /api/:username/config/whitelist/:username
+<%= http "DELETE /api/:username/config/whitelist/:username" %>
 
 ### Response
 

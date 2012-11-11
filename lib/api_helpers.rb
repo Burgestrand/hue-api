@@ -43,6 +43,12 @@ module APIHelpers
     code_block(lines.join("\n"), class: css_class)
   end
 
+  def http(request)
+    verb, url = request.split(" ", 2)
+    url.gsub!(%r|(?<=/):([^/]+)|) { |param| %(<em class="param">#{$1}</em>) }
+    code_block(%(<strong class="http-verb %s">%s</strong> %s) % [verb.downcase, verb.upcase, url], class: "api-endpoint")
+  end
+
   def json(json = nil, &block)
     hash = if block_given?
       JSON.load capture(&block)
@@ -51,23 +57,22 @@ module APIHelpers
     else
       json
     end
-
-    html = code_block(JSON.pretty_generate(hash), class: "highlight", language: "javascript")
-    concat(html, &block)
+    code_block(JSON.pretty_generate(hash), class: "highlight", language: "javascript", &block)
   end
 
   def xml(&block)
     xml = capture(&block)
-    html = code_block(xml, language: "xml", class: "highlight")
-    concat(html, &block)
+    code_block(h(xml), language: "xml", class: "highlight")
   end
 
-  def code_block(content, attributes = {})
-    language = "language-#{attributes.delete(:language)}"
+  def code_block(content, attributes = {}, &block)
+    language = "language-#{attributes.delete(:language)}" if attributes.has_key?(:language)
     attributes_html = attributes.map do |tuple|
       '%s="%s"' % tuple.map { |x| h(x.to_s) }
     end.join(" ")
-    %(<pre #{attributes_html}><code class="#{language}">#{h(content.to_s)}</code></pre>)
+
+    html = %(<pre #{attributes_html}><code class="#{language}">#{content}</code></pre>)
+    concat(html, &block)
   end
 
   def concat(string, &block)
