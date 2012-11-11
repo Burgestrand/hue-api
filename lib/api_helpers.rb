@@ -62,7 +62,7 @@ module APIHelpers
 
   def xml(&block)
     xml = capture(&block)
-    code_block(h(xml), language: "xml", class: "highlight")
+    code_block(h(xml), language: "xml", class: "highlight", &block)
   end
 
   def code_block(content, attributes = {}, &block)
