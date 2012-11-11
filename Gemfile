@@ -11,6 +11,7 @@ gem 'rake'
 gem 'thin'
 gem 'yajl-ruby'
 gem 'foreman'
+gem 'pry'
 
 group :development do
   gem 'adsf'
