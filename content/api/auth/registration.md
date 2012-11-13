@@ -71,7 +71,7 @@ devicetype
 
 ## Deregistering an application
 
-Removes a username from the whitelist of registered applications. See also <%= relative_link_to 'changing configuration', '/api/config/change' %>.
+Removes a username from the whitelist of registered applications. See also <%= relative_link_to 'changing configuration', '/api/config' %>.
 
 <%= http "DELETE /api/:username/config/whitelist/:username" %>
 
