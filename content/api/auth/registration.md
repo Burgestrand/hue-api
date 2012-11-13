@@ -10,6 +10,8 @@ bridge will remember your username, and keeps track of when it was last used.
 Multiple applications can be registered with the same username, as long as their devicetype
 is different. It is currently unknown what effect this might have on the bridge.
 
+You can <%= relative_link_to 'deregister a registered application through the configuration', '/api/config#deregistering-an-application' %>.
+
 <%= toc %>
 
 ## Registering an application
@@ -68,13 +70,3 @@ devicetype
   }
 ]
 <% end %>
-
-## Deregistering an application
-
-Removes a username from the whitelist of registered applications. See also <%= relative_link_to 'changing configuration', '/api/config' %>.
-
-<%= http "DELETE /api/:username/config/whitelist/:username" %>
-
-### Response
-
-<%= json [{ "success" => "/config/whitelist/burgestrand deleted" }] %>

@@ -4,6 +4,11 @@ title: Bridge configuration
 
 # Bridge configuration
 
+You can read and change configuration settings of your bridge, such as it’s name,
+wether it uses DHCP or not, proxy information and application whitelist.
+
+<%= toc %>
+
 ## Reading bridge configuration
 
 <%= http 'GET /api/:username/config' %>
@@ -44,3 +49,31 @@ title: Bridge configuration
   "portalservices":true
 }
 <% end %>
+
+## Updating bridge configuration
+
+<%= http 'PUT /api/:username/config' %>
+
+### Parameters
+
+All parameters are optional. Only the parameters present will update values on the Hue.
+
+name
+: new name of the Hue bridge.
+
+dhcp
+: true if the bridge should use DHCP. if you set this to false you might make your bridge unreachable.
+  If that happens, there is a “Restore to factory settings” button on the back of the bridge.
+
+portalservices
+: true if remote access through <http://meethue.com/> is to be enabled.
+
+## Deregistering an application
+
+Removes a username from the whitelist of registered applications.
+
+<%= http "DELETE /api/:username/config/whitelist/:username" %>
+
+### Response
+
+<%= json [{ "success" => "/config/whitelist/burgestrand deleted" }] %>
