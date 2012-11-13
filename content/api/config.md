@@ -68,6 +68,22 @@ dhcp
 portalservices
 : true if remote access through <http://meethue.com/> is to be enabled.
 
+### Input
+
+<%= json "name" => "Lumm" %>
+
+### Response
+
+<% json do %>
+[
+  {
+    "success":{
+      "/config/name":"Lumm"
+    }
+  }
+]
+<% end %>
+
 ## Deregistering an application
 
 Removes a username from the whitelist of registered applications.

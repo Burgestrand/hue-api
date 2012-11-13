@@ -169,39 +169,6 @@ Retrieves a list of schedules and their names.
 }
 ```
 
-### PUT /api/`username`/config/
-
-Update Hue configuration values. A list of values can be retrieved from `GET /api/username/config`.
-
-#### Parameters
-
-All parameters are optional. Only the parameters present will update values on the Hue.
-
-- name: name of the Hue bridge.
-
-Acceptable example payload:
-
-```json
-{
-  "name": "New name"
-}
-```
-
-#### Responses
-
-The response will, on success, contain a list of properties that were changed, together with their new values. Here’s
-an example from changing the name.
-
-```json
-[
-  {
-    "success":{
-      "/config/name":"Lumm"
-    }
-  }
-]
-```
-
 ### PUT /api/`username`/lights/`light_number`/state
 
 Change the state parameter of any of your lights.
