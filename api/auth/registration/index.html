@@ -31,9 +31,10 @@ bridge will remember your username, and keeps track of when it was last used.</p
 <p>Multiple applications can be registered with the same username, as long as their devicetype
 is different. It is currently unknown what effect this might have on the bridge.</p>
 
+<p>You can <a href="../../config#deregistering-an-application">deregister a registered application through the configuration</a>.</p>
+
 <ul id="markdown-toc">
 <li><a href="#registering-an-application">Registering an application</a></li>
-  <li><a href="#deregistering-an-application">Deregistering an application</a></li>
 </ul><h2 id="registering-an-application">Registering an application</h2>
 
 <pre class="api-endpoint"><code class=""><strong class="http-verb post">POST</strong> /api</code></pre>
@@ -94,20 +95,6 @@ is different. It is currently unknown what effect this might have on the bridge.
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
-
-<h2 id="deregistering-an-application">Deregistering an application</h2>
-
-<p>Removes a username from the whitelist of registered applications. See also <a href="../../config/change">changing configuration</a>.</p>
-
-<pre class="api-endpoint"><code class=""><strong class="http-verb delete">DELETE</strong> /api/<em class="param">username</em>/config/whitelist/<em class="param">username</em></code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"success"</span><span class="o">:</span> <span class="s2">"/config/whitelist/burgestrand deleted"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -117,7 +104,6 @@ is different. It is currently unknown what effect this might have on the bridge.
             <ul class="js-guides">
               <li><a href="../../discovery">Bridge discovery</a></li>
               <li><a href=".">One-time application registration</a></li>
-              <li><a href="../../settings">Hue bridge settings</a></li>
             </ul>
           </li>
           <li class="js-guides"><h3><a href="../../config">Configuration</a></h3></li>

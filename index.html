@@ -146,107 +146,6 @@ over HTTP. You pick your own username, which is used for all subsequent API call
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
-
-<h3 id="get-apiusernamelights">GET /api/<code>username</code>/lights/</h3>
-
-<p>Retrieves a list of lights paired with the Hue bridge, and their names.</p>
-
-<p><code>json
-{
-  "1":{
-    "name":"TV Vänster"
-  },
-  "2":{
-    "name":"TV Höger"
-  },
-  "3":{
-    "name":"Skrivbord"
-  }
-}
-</code></p>
-
-<h3 id="get-apiusernamegroups">GET /api/<code>username</code>/groups</h3>
-
-<p>Believed to return a list of groups. Most likely similar to the <code>/schedules</code> and <code>/lights</code> call;
-returning an object of groups IDs and their names.</p>
-
-<h3 id="get-apiusernameschedules">GET /api/<code>username</code>/schedules</h3>
-
-<p>Retrieves a list of schedules and their names.</p>
-
-<p><code>json
-{
-  "1":{
-    "name":"Frukost on f 423043           "
-  },
-  "2":{
-    "name":"Frukost on 607775             "
-  }
-}
-</code></p>
-
-<h3 id="put-apiusernameconfig">PUT /api/<code>username</code>/config/</h3>
-
-<p>Update Hue configuration values. A list of values can be retrieved from <code>GET /api/username/config</code>.</p>
-
-<h4 id="parameters">Parameters</h4>
-
-<p>All parameters are optional. Only the parameters present will update values on the Hue.</p>
-
-<ul>
-<li>name: name of the Hue bridge.</li>
-</ul><p>Acceptable example payload:</p>
-
-<p><code>json
-{
-  "name": "New name"
-}
-</code></p>
-
-<h4 id="responses">Responses</h4>
-
-<p>The response will, on success, contain a list of properties that were changed, together with their new values. Here’s
-an example from changing the name.</p>
-
-<p><code>json
-[
-  {
-    "success":{
-      "/config/name":"Lumm"
-    }
-  }
-]
-</code></p>
-
-<h3 id="put-apiusernamelightslightnumberstate">PUT /api/<code>username</code>/lights/<code>light_number</code>/state</h3>
-
-<p>Change the state parameter of any of your lights.</p>
-
-<h4 id="parameters-1">Parameters</h4>
-
-<p>All parameters are optional.</p>
-
-<ul>
-<li>on: true if the light should be on, false if it should be off.</li>
-</ul><p>Acceptable example payload, turning the light off.</p>
-
-<p><code>json
-{
-  "on":false
-}
-</code></p>
-
-<h4 id="responses-1">Responses</h4>
-
-<p><code>json
-[
-  {
-    "success":{
-      "/lights/1/state/on":false
-    }
-  }
-]
-</code></p>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -256,7 +155,6 @@ an example from changing the name.</p>
             <ul class="js-guides">
               <li><a href="api/discovery">Bridge discovery</a></li>
               <li><a href="api/auth/registration">One-time application registration</a></li>
-              <li><a href="api/settings">Hue bridge settings</a></li>
             </ul>
           </li>
           <li class="js-guides"><h3><a href="api/config">Configuration</a></h3></li>

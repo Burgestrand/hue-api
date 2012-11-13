@@ -23,7 +23,26 @@
 
   <div id="wrapper">
     <div class="content">
-      
+      <h1 id="schedules">Schedules</h1>
+
+<p>Schedules allow you to change light state at a given time.</p>
+
+<ul id="markdown-toc">
+<li><a href="#list-all-schedules">List all schedules</a></li>
+</ul><h2 id="list-all-schedules">List all schedules</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/schedules</code></pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"1"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Frukost on f 423043           "</span>
+  <span class="p">},</span>
+  <span class="s2">"2"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Frukost on 607775             "</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -33,7 +52,6 @@
             <ul class="js-guides">
               <li><a href="../discovery">Bridge discovery</a></li>
               <li><a href="../auth/registration">One-time application registration</a></li>
-              <li><a href="../settings">Hue bridge settings</a></li>
             </ul>
           </li>
           <li class="js-guides"><h3><a href="../config">Configuration</a></h3></li>

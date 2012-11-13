@@ -23,7 +23,114 @@
 
   <div id="wrapper">
     <div class="content">
-      
+      <h1 id="lights">Lights</h1>
+
+<p>Allows you to list and control individual lights. You can only
+change the state of one light at a time. For controlling multiple
+lights with one API call, <a href="../groups">see Groups</a>.</p>
+
+<ul id="markdown-toc">
+<li><a href="#list-all-lights-and-their-names">List all lights and their names</a></li>
+  <li><a href="#show-light-information">Show light information</a></li>
+  <li><a href="#changing-light-color-and-turning-them-onoff">Changing light color and turning them on/off</a></li>
+</ul><h2 id="list-all-lights-and-their-names">List all lights and their names</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/lights</code></pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"1"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"TV Left"</span>
+  <span class="p">},</span>
+  <span class="s2">"2"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"TV Right"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<p>The number before each light is it’s ID. You’ll use it for changing
+the state of the light.</p>
+
+<h2 id="show-light-information">Show light information</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/lights/<em class="param">number</em></code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>number</dt>
+  <dd>number assigned to the light you wish to control, see <a href="#list-all-lights-and-their-names">List all lights and their names</a>.</dd>
+</dl><h3 id="response-1">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"state"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"on"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"bri"</span><span class="o">:</span> <span class="mi">202</span><span class="p">,</span>
+    <span class="s2">"hue"</span><span class="o">:</span> <span class="mi">13122</span><span class="p">,</span>
+    <span class="s2">"sat"</span><span class="o">:</span> <span class="mi">211</span><span class="p">,</span>
+    <span class="s2">"xy"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="mf">0.5119</span><span class="p">,</span>
+      <span class="mf">0.4147</span>
+    <span class="p">],</span>
+    <span class="s2">"ct"</span><span class="o">:</span> <span class="mi">467</span><span class="p">,</span>
+    <span class="s2">"alert"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"effect"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"colormode"</span><span class="o">:</span> <span class="s2">"ct"</span><span class="p">,</span>
+    <span class="s2">"reachable"</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Extended color light"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"TV Left"</span><span class="p">,</span>
+  <span class="s2">"modelid"</span><span class="o">:</span> <span class="s2">"LCT001"</span><span class="p">,</span>
+  <span class="s2">"swversion"</span><span class="o">:</span> <span class="s2">"65003148"</span><span class="p">,</span>
+  <span class="s2">"pointsymbol"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"1"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"2"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"3"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"4"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"5"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"6"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"7"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"8"</span><span class="o">:</span> <span class="s2">"none"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="changing-light-color-and-turning-them-onoff">Changing light color and turning them on/off</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb put">PUT</strong> /api/<em class="param">username</em>/lights/<em class="param">number</em>/state</code></pre>
+
+<h3 id="parameters-courtesy-of-hacking-the-huehttprsmckcoukhue">Parameters (courtesy of <a href="http://rsmck.co.uk/hue">Hacking the Hue</a>)</h3>
+
+<dl>
+<dt>on</dt>
+  <dd>true if the light should be on.</dd>
+  <dt>bri</dt>
+  <dd>brightness, in range 0 - 254. 0 is not off.</dd>
+  <dt>hue</dt>
+  <dd>hue, in range 0 - 65535.</dd>
+  <dt>sat</dt>
+  <dd>saturation, in range 0 - 254.</dd>
+  <dt>xy</dt>
+  <dd>color as array of xy-coordinates.</dd>
+  <dt>ct</dt>
+  <dd>white color temperature, 154 - 500.</dd>
+  <dt>alert</dt>
+  <dd>
+<code>select</code> flashes light once, <code>lselect</code> flashes repeatedly for 10 seconds.</dd>
+</dl><h3 id="input">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"on"</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"success"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"/lights/1/state/on"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -33,7 +140,6 @@
             <ul class="js-guides">
               <li><a href="../discovery">Bridge discovery</a></li>
               <li><a href="../auth/registration">One-time application registration</a></li>
-              <li><a href="../settings">Hue bridge settings</a></li>
             </ul>
           </li>
           <li class="js-guides"><h3><a href="../config">Configuration</a></h3></li>
