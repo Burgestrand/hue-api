@@ -130,23 +130,3 @@ You can read the state of the entire system, after <%= relative_link_to 'authent
   }
 }
 <% end %>
-
-### GET /api/`username`/groups
-
-Believed to return a list of groups. Most likely similar to the `/schedules` and `/lights` call;
-returning an object of groups IDs and their names.
-
-### GET /api/`username`/schedules
-
-Retrieves a list of schedules and their names.
-
-```json
-{
-  "1":{
-    "name":"Frukost on f 423043           "
-  },
-  "2":{
-    "name":"Frukost on 607775             "
-  }
-}
-```
