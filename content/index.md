@@ -131,24 +131,6 @@ You can read the state of the entire system, after <%= relative_link_to 'authent
 }
 <% end %>
 
-### GET /api/`username`/lights/
-
-Retrieves a list of lights paired with the Hue bridge, and their names.
-
-```json
-{
-  "1":{
-    "name":"TV Vänster"
-  },
-  "2":{
-    "name":"TV Höger"
-  },
-  "3":{
-    "name":"Skrivbord"
-  }
-}
-```
-
 ### GET /api/`username`/groups
 
 Believed to return a list of groups. Most likely similar to the `/schedules` and `/lights` call;
@@ -167,34 +149,4 @@ Retrieves a list of schedules and their names.
     "name":"Frukost on 607775             "
   }
 }
-```
-
-### PUT /api/`username`/lights/`light_number`/state
-
-Change the state parameter of any of your lights.
-
-#### Parameters
-
-All parameters are optional.
-
-- on: true if the light should be on, false if it should be off.
-
-Acceptable example payload, turning the light off.
-
-```json
-{
-  "on":false
-}
-```
-
-#### Responses
-
-```json
-[
-  {
-    "success":{
-      "/lights/1/state/on":false
-    }
-  }
-]
 ```
