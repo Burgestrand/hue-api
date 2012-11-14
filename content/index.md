@@ -28,7 +28,7 @@ changes, and send us a [pull request](http://help.github.com/send-pull-requests/
 
 1. <%= relative_link_to 'Hue bridge discovery', '/api/discovery' %> via SSDP (a multicast protocol over UDP).
    Ruhue has an example of how this discovery can be performed written in Ruby and UDP sockets: [Hue.discover][].
-2. <%= relative_link_to 'A one-time application registration', '/api/auth/registraiton' %> to the Hue bridge
+2. <%= relative_link_to 'A one-time application registration', '/api/auth/registration' %> to the Hue bridge
    over HTTP. You pick your own username, which is used for all subsequent API calls.
 3. Finished. You may now place any API calls, using your username, against the Hue bridge.
 
