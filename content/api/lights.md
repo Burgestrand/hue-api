@@ -74,9 +74,12 @@ number
 
 ## Changing light color and turning them on/off
 
+There are three modes of color: hue/sat/bri, xy-coordinates, or color temperature. Setting one
+of these will change the colormode, but will not update any other values to reflect the change.
+
 <%= http 'PUT /api/:username/lights/:number/state' %>
 
-### Parameters (courtesy of [Hacking the Hue](http://rsmck.co.uk/hue))
+### Parameters
 
 on
 : true if the light should be on.
@@ -94,10 +97,13 @@ xy
 : color as array of xy-coordinates.
 
 ct
-: white color temperature, 154 - 500.
+: white color temperature, 154 (cold) - 500 (warm).
 
 alert
 : `select` flashes light once, `lselect` flashes repeatedly for 10 seconds.
+
+transitiontime
+: time for transition in centiseconds.
 
 ### Input
 
