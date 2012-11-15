@@ -16,6 +16,9 @@ You can <%= relative_link_to 'deregister a registered application through the co
 
 ## Registering an application
 
+The response contains the username assigned. In some cases it might not be the same username as the one that
+was sent to the bridge.
+
 <%= http 'POST /api' %>
 
 ### Parameters
@@ -35,6 +38,27 @@ devicetype
 #### Success
 
 <%= json [{"success" => { "username" => "burgestrand" }}] %>
+
+#### Username containing a space
+
+In this case, the response contains the username to be used for subsequent API calls, as well as an error.
+
+<% json do %>
+[
+  {
+    "error":{
+      "type":7,
+      "address":"/username",
+      "description":"invalid value, kim burgestrand, for parameter, username"
+    }
+  },
+  {
+    "success":{
+      "username":"508ed817c37c378e20ab523f25c4b"
+    }
+  }
+]
+<% end %>
 
 #### Link button not pressed
 
