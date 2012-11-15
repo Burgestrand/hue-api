@@ -1,7 +1,11 @@
 # [Philips Hue API — Unofficial Reference Documentation](http://burgestrand.github.com/hue-api)
 
-Philips Hue API reference documentation, created by reverse-engineering,
-sniffing network traffic and a lot of guessing.
+Philips Hue API reference documentation, created by sniffing network traffic, a
+lot of guessing, and interpreting and trying out what others have discovered at:
+
+- [Hack the Hue](http://rsmck.co.uk/hue)
+- [A Day with Philips Hue](http://www.nerdblog.com/2012/10/a-day-with-philips-hue.html?showComment=1352172383498)
+- [Philips Hue Lightbulb API Documentation](http://blog.ef.net/2012/11/02/philips-hue-api.html)
 
 There is a mailing list, dedicated to discussions and questions about hacking
 the Philips Hue and related protocols.
@@ -15,6 +19,7 @@ for hosting via [GitHub Pages][].
 
 All submissions are welcome. To submit a change, fork this repo, commit your
 changes, and send us a [pull request](http://help.github.com/send-pull-requests/).
+Successful pull requests result in commit access to the repository.
 
 [nanoc]: http://nanoc.stoneship.org/
 [GitHub Pages]: http://pages.github.com/
