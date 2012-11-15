@@ -37,6 +37,9 @@ is different. It is currently unknown what effect this might have on the bridge.
 <li><a href="#registering-an-application">Registering an application</a></li>
 </ul><h2 id="registering-an-application">Registering an application</h2>
 
+<p>The response contains the username assigned. In some cases it might not be the same username as the one that
+was sent to the bridge.</p>
+
 <pre class="api-endpoint"><code class=""><strong class="http-verb post">POST</strong> /api</code></pre>
 
 <h3 id="parameters">Parameters</h3>
@@ -61,6 +64,25 @@ is different. It is currently unknown what effect this might have on the bridge.
   <span class="p">{</span>
     <span class="s2">"success"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"username"</span><span class="o">:</span> <span class="s2">"burgestrand"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h4 id="username-containing-a-space">Username containing a space</h4>
+
+<p>In this case, the response contains the username to be used for subsequent API calls, as well as an error.</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"error"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="s2">"address"</span><span class="o">:</span> <span class="s2">"/username"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"invalid value, kim burgestrand, for parameter, username"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"success"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"username"</span><span class="o">:</span> <span class="s2">"508ed817c37c378e20ab523f25c4b"</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>

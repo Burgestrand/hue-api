@@ -96,9 +96,12 @@ the state of the light.</p>
 
 <h2 id="changing-light-color-and-turning-them-onoff">Changing light color and turning them on/off</h2>
 
+<p>There are three modes of color: hue/sat/bri, xy-coordinates, or color temperature. Setting one
+of these will change the colormode, but will not update any other values to reflect the change.</p>
+
 <pre class="api-endpoint"><code class=""><strong class="http-verb put">PUT</strong> /api/<em class="param">username</em>/lights/<em class="param">number</em>/state</code></pre>
 
-<h3 id="parameters-courtesy-of-hacking-the-huehttprsmckcoukhue">Parameters (courtesy of <a href="http://rsmck.co.uk/hue">Hacking the Hue</a>)</h3>
+<h3 id="parameters-1">Parameters</h3>
 
 <dl>
 <dt>on</dt>
@@ -112,10 +115,12 @@ the state of the light.</p>
   <dt>xy</dt>
   <dd>color as array of xy-coordinates.</dd>
   <dt>ct</dt>
-  <dd>white color temperature, 154 - 500.</dd>
+  <dd>white color temperature, 154 (cold) - 500 (warm).</dd>
   <dt>alert</dt>
   <dd>
 <code>select</code> flashes light once, <code>lselect</code> flashes repeatedly for 10 seconds.</dd>
+  <dt>transitiontime</dt>
+  <dd>time for transition in centiseconds.</dd>
 </dl><h3 id="input">Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
