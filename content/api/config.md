@@ -68,6 +68,9 @@ dhcp
 portalservices
 : true if remote access through <http://meethue.com/> is to be enabled.
 
+linkbutton
+: true to programatically press the link button on the bridge. Allows registering new applications.
+
 ### Input
 
 <%= json "name" => "Lumm" %>
