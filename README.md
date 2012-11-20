@@ -27,10 +27,15 @@ Successful pull requests result in commit access to the repository.
 
 ## Setup
 
-Ruby 1.9 is required to build the site. You’ll also need the [bundler ruby gem][] to
-install the dependencies required for building the site:
+Ruby 1.8 or newer is required to build the site. Most modern operating systems
+come with ruby 1.8.5 (or newer) pre-installed, which should suffice. On Windows
+you can install ruby with [RubyInstaller](http://rubyinstaller.org/).
+
+You’ll also need the [bundler ruby gem][] to install the dependencies required
+for building the site.
 
 ```shell
+gem install bundler # install bundler
 bundle install # install dependencies with bundler
 ```
 

@@ -40,13 +40,13 @@ module APIHelpers
       lines << "#{key}: #{value}"
     end
 
-    code_block(lines.join("\n"), class: css_class)
+    code_block(lines.join("\n"), :class => css_class)
   end
 
   def http(request)
     verb, url = request.split(" ", 2)
-    url.gsub!(%r|(?<=/):([^/]+)|) { |param| %(<em class="param">#{$1}</em>) }
-    code_block(%(<strong class="http-verb %s">%s</strong> %s) % [verb.downcase, verb.upcase, url], class: "api-endpoint")
+    url.gsub!(%r|/:([^/]+)|) { |param| %(/<em class="param">#{$1.sub(/\A\//, "")}</em>) }
+    code_block(%(<strong class="http-verb %s">%s</strong> %s) % [verb.downcase, verb.upcase, url], :class => "api-endpoint")
   end
 
   def json(json = nil, &block)
@@ -57,12 +57,12 @@ module APIHelpers
     else
       json
     end
-    code_block(JSON.pretty_generate(hash), class: "highlight", language: "javascript", &block)
+    code_block(JSON.pretty_generate(hash), :class => "highlight", :language => "javascript", &block)
   end
 
   def xml(&block)
     xml = capture(&block)
-    code_block(h(xml), language: "xml", class: "highlight", &block)
+    code_block(h(xml), :language => "xml", :class => "highlight", &block)
   end
 
   def code_block(content = nil, attributes = {}, &block)
