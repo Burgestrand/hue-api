@@ -58,55 +58,53 @@ to you are:
 Not sure how to structure the docs?  Here's what the structure of the
 API docs should look like:
 
+    ---
+    title: API title
+    ---
+
     # API title
+
+    Description about the API.
+
+    <%= toc %>
 
     ## API endpoint title
 
-        [VERB] /path/to/endpoint.json
+    <%= http 'VERB /api/:username/endpoint' %>
 
-    ### Parameters
+    ### Parameters (optional header)
 
     name
     : description
 
-    ### Input (request json body)
+    ### Input (example request json body)
 
     <%= json :field => "sample value" %>
 
     ### Response
 
-    <%= headers 200, :pagination => true, 'X-Custom-Header' => "value" %>
-    <%= json :resource_name %>
+    <% json do %>
+    { "some": "json" }
+    <% end %>
 
 **Note**: We're using [Kramdown Markdown extensions](http://kramdown.rubyforge.org/syntax.html), such as definition lists.
 
 ### JSON Responses
 
 We specify the JSON responses in ruby so that we don't have to write
-them by hand all over the docs.  You can render the JSON for a resource
-like this:
+them by hand all over the docs. You can specify it as a ruby object,
+or within a block.
 
 ```erb
-<%= json :issue %>
+<%= json [{ success: true }] %>
 ```
-
-This looks up `GitHub::Resources::ISSUE` in `lib/resources.rb`.
-
-Some actions return arrays.  You can modify the JSON by passing a block:
 
 ```erb
-<%= json(:issue) { |hash| [hash] } %>
+<% json do %>
+{
+  "1":{
+    "name":"Frukost on f 423043           "
+  }
+}
+<% end %>
 ```
-
-### Terminal blocks
-
-You can specify terminal blocks with `pre.terminal` elements.  It'd be
-nice if Markdown could do this more cleanly...
-
-    <pre class="terminal">
-    $ curl foobar
-    ....
-    </pre>
-
-This isn't a `curl` tutorial though, I'm not sure every API call needs
-to show how to access it with `curl`.
