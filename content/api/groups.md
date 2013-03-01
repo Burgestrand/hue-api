@@ -61,3 +61,29 @@ number
 ### Parameters
 
 <%= relative_link_to "See the API for “Changing light color and turning them on/off”.", "/api/lights/#changing-light-color-and-turning-them-onoff" %>
+
+### Input
+
+<% json do %>
+{
+  "on":true,
+  "hue":25000
+}
+<% end %>
+
+### Response
+
+<% json do %>
+[
+  {
+    "success":{
+      "/groups/0/action/on":true
+    }
+  },
+  {
+    "success":{
+      "/groups/0/action/hue":13000
+    }
+  }
+]
+<% end %>
