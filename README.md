@@ -45,11 +45,15 @@ You can see the available commands with rake:
 rake -T
 ```
 
-If you are mainly concerned with adding or modifying content, the rake tasks interesting
-to you are:
+If you are mainly concerned with adding or modifying content, all you really need
+is to use foreman, by issuing the following command:
 
-- `rake compile`, compiles the site into `output/` directory.
-- `rake server`, starts a server on port 3000 for viewing the site locally.
+```shell
+foreman start
+```
+
+This’ll start a web server on <http://localhost:5000/>, as well as a process to
+automatically watch and recompile the project on changes.
 
 [bundler ruby gem]: http://gembundler.com/
 
@@ -91,13 +95,15 @@ API docs should look like:
 
 ### JSON Responses
 
-We specify the JSON responses in ruby so that we don't have to write
-them by hand all over the docs. You can specify it as a ruby object,
-or within a block.
+You can specify JSON by invoking the JSON helper with a ruby structure,
+which in turn is converted to JSON and printed.
 
 ```erb
 <%= json [{ success: true }] %>
 ```
+
+You can also give JSON a block which contains JSON, and the helper will
+format it correctly.
 
 ```erb
 <% json do %>
