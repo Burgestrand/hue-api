@@ -28,8 +28,14 @@
 <p>Groups allow you to group your lights, useful to control them all at the
 same time with just one API call.</p>
 
+<p><strong>Note</strong>: There exists a special group with a number of 0, which contains all
+lights known to the bridge. Issuing operations on group #0 will change all
+lights simultaneously.</p>
+
 <ul id="markdown-toc">
 <li><a href="#list-all-groups">List all groups</a></li>
+  <li><a href="#show-group-information">Show group information</a></li>
+  <li><a href="#controlling-all-lights-in-a-group">Controlling all lights in a group</a></li>
 </ul><h2 id="list-all-groups">List all groups</h2>
 
 <pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/groups</code></pre>
@@ -37,6 +43,52 @@ same time with just one API call.</p>
 <h3 id="response">Response</h3>
 
 <p>No meaningful response known yet.</p>
+
+<h2 id="show-group-information">Show group information</h2>
+
+<p>Information retrieved is not live-updated from all lights. Values returned are simply
+the values that were last assigned.</p>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/groups/<em class="param">number</em></code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>number</dt>
+  <dd>group number of the group you wish to control, 0 for a group which contains all lights.</dd>
+</dl><h3 id="response-1">Response</h3>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/groups/0</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"action"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"on"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"bri"</span><span class="o">:</span> <span class="mi">254</span><span class="p">,</span>
+    <span class="s2">"hue"</span><span class="o">:</span> <span class="mi">13122</span><span class="p">,</span>
+    <span class="s2">"sat"</span><span class="o">:</span> <span class="mi">211</span><span class="p">,</span>
+    <span class="s2">"xy"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="mf">0.5119</span><span class="p">,</span>
+      <span class="mf">0.4147</span>
+    <span class="p">],</span>
+    <span class="s2">"ct"</span><span class="o">:</span> <span class="mi">467</span><span class="p">,</span>
+    <span class="s2">"effect"</span><span class="o">:</span> <span class="s2">"none"</span><span class="p">,</span>
+    <span class="s2">"colormode"</span><span class="o">:</span> <span class="s2">"ct"</span>
+  <span class="p">},</span>
+  <span class="s2">"lights"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"1"</span><span class="p">,</span>
+    <span class="s2">"2"</span><span class="p">,</span>
+    <span class="s2">"3"</span>
+  <span class="p">],</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Lightset 0"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="controlling-all-lights-in-a-group">Controlling all lights in a group</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb put">PUT</strong> /api/<em class="param">username</em>/groups/<em class="param">number</em>/action</code></pre>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<p><a href="../lights/#changing-light-color-and-turning-them-onoff">See the API for “Changing light color and turning them on/off”.</a></p>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
