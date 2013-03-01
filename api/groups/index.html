@@ -89,6 +89,28 @@ the values that were last assigned.</p>
 <h3 id="parameters-1">Parameters</h3>
 
 <p><a href="../lights/#changing-light-color-and-turning-them-onoff">See the API for “Changing light color and turning them on/off”.</a></p>
+
+<h3 id="input">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"on"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"hue"</span><span class="o">:</span> <span class="mi">25000</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"success"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"/groups/0/action/on"</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"success"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"/groups/0/action/hue"</span><span class="o">:</span> <span class="mi">13000</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
