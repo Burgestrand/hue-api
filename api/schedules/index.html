@@ -25,11 +25,18 @@
     <div class="content">
       <h1 id="schedules">Schedules</h1>
 
-<p>Schedules allow you to change light state at a given time.</p>
+<p>Schedules allow you to schedule an API call for a given point in
+time in the future. You can schedule any Hue bridge API call.</p>
 
 <ul id="markdown-toc">
 <li><a href="#list-all-schedules">List all schedules</a></li>
+  <li><a href="#create-a-new-scheduled-operation">Create a new scheduled operation</a></li>
+  <li><a href="#show-schedule-information">Show schedule information</a></li>
+  <li><a href="#update-an-existing-scheduled-operation">Update an existing scheduled operation</a></li>
+  <li><a href="#delete-a-previously-scheduled-operation">Delete a previously scheduled operation</a></li>
 </ul><h2 id="list-all-schedules">List all schedules</h2>
+
+<p>All you receive from this command is the schedule id and it’s name.</p>
 
 <pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/schedules</code></pre>
 
@@ -43,6 +50,128 @@
     <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Frukost on 607775             "</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+
+<h2 id="create-a-new-scheduled-operation">Create a new scheduled operation</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb post">POST</strong> /api/<em class="param">username</em>/schedules</code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>name (optional)</dt>
+  <dd>a name to give to your schedule. Does not need to be unique. Must be between
+1 and 32 characters. If not specified it defaults to “schedule”.</dd>
+  <dt>description (optional)</dt>
+  <dd>a description to give your schedule. Must be between 1 and 64 characters.</dd>
+  <dt>time</dt>
+  <dd>a time, specified in UTC, formatted as YYYY-MM-DDTHH:MM:SS, when the scheduled
+operation should be performed. Once performed, the scheduled operation is removed
+from the Hue. Values earlier than the current time will result in an error.</dd>
+  <dt>command</dt>
+  <dd>a command object, describing the request to be performed when the scheduled
+operation is invoked. You can invoke pretty much any URL with any method,
+as long as all parameters have been defined.
+
+    <dl>
+<dt>action</dt>
+      <dd>a bridge API resource to which the operation should be invoked on.</dd>
+      <dt>method</dt>
+      <dd>the HTTP method the operation should be invoked with.</dd>
+      <dt>body</dt>
+      <dd>body that the operation should be sent with, <code>{}</code> if it should be empty.</dd>
+    </dl>
+</dd>
+</dl><h3 id="input">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Good night"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"I should really go to bed by now."</span><span class="p">,</span>
+  <span class="s2">"command"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"address"</span><span class="o">:</span> <span class="s2">"/api/24e04807fe143caeb52b4ccb305635f8/groups/0/action"</span><span class="p">,</span>
+    <span class="s2">"method"</span><span class="o">:</span> <span class="s2">"PUT"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"on"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"time"</span><span class="o">:</span> <span class="s2">"2013-03-02T00:00:00"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<p>The id given is the id number for the newly created schedule.</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"success"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="show-schedule-information">Show schedule information</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb get">GET</strong> /api/<em class="param">username</em>/schedules/<em class="param">number</em></code></pre>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<dl>
+<dt>number</dt>
+  <dd>group number you wish to retrieve information from.</dd>
+</dl><h3 id="response-2">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Good night"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"I should really go to bed by now."</span><span class="p">,</span>
+  <span class="s2">"command"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"address"</span><span class="o">:</span> <span class="s2">"/api/burgestrand/groups/0/action"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"on"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="s2">"method"</span><span class="o">:</span> <span class="s2">"PUT"</span>
+  <span class="p">},</span>
+  <span class="s2">"time"</span><span class="o">:</span> <span class="s2">"2013-03-02T00:00:00"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="update-an-existing-scheduled-operation">Update an existing scheduled operation</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb put">PUT</strong> /api/<em class="param">username</em>/schedules/<em class="param">number</em></code></pre>
+
+<h3 id="parameters-2">Parameters</h3>
+
+<p><a href="#create-a-new-scheduled-operation">See the parameters for “Create a new scheduled operation”.</a></p>
+
+<h3 id="input-1">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hey"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"success"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"/schedules/1/name"</span><span class="o">:</span> <span class="s2">"Hey"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="delete-a-previously-scheduled-operation">Delete a previously scheduled operation</h2>
+
+<pre class="api-endpoint"><code class=""><strong class="http-verb delete">DELETE</strong> /api/<em class="param">username</em>/schedules/<em class="param">number</em></code></pre>
+
+<h3 id="parameters-3">Parameters</h3>
+
+<dl>
+<dt>number</dt>
+  <dd>group number you wish to delete.</dd>
+</dl><h3 id="response-4">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"success"</span><span class="o">:</span> <span class="s2">"/schedules/6 deleted"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

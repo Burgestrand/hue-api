@@ -449,6 +449,10 @@ div.sidebar-module ul ul li span {
   margin-left: 10px;
 }
 
+.content dl dl {
+  margin-top: 1em;
+}
+
 .content dt {
   color: #666;
 }
