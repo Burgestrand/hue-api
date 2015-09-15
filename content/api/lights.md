@@ -27,7 +27,7 @@ lights with one API call, <%= relative_link_to 'see Groups', '/api/groups' %>.
 }
 <% end %>
 
-The number before each light is it’s ID. You’ll use it for changing
+The number before each light is its ID. You’ll use it for changing
 the state of the light.
 
 ## Show light information
