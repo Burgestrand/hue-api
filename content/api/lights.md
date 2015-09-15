@@ -103,7 +103,7 @@ alert
 : `select` flashes light once, `lselect` flashes repeatedly for 10 seconds.
 
 transitiontime
-: time for transition in centiseconds.
+: time for transition in deciseconds.
 
 ### Input
 
